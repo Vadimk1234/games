@@ -1,0 +1,40 @@
+from PIL import Image
+from PIL import ImageFilter
+from PyQt5.QtWidgets import (QApplication, QMainWindow,QFileDialog,QMessageBox,QListWidget,QBoxLayout,QVBoxLayout,QHBoxLayout,QWidget,QLabel,QPushButton)
+
+app=QApplication([])
+window=QWidget()
+window.setWindowTitle('Easy editor')
+btn_dir=QPushButton('Папка')
+ib_image=QLabel('картинки')
+lw_files=QListWidget()
+
+btn_left=QPushButton('left')
+btn_right=QPushButton('right')
+btn_flip=QPushButton('flip')
+btn_sharp=QPushButton('sharp')
+btn_bw=QPushButton('B/W')
+
+row=QHBoxLayout()
+col1=QVBoxLayout()
+col2=QVBoxLayout()
+
+
+col1.addWidget(btn_dir)
+col2.addWidget(lw_files)
+col2.addWidget(ib_image,95)
+row_tools=QHBoxLayout()
+row_tools.addWidget(btn_left)
+row_tools.addWidget(btn_right)
+row_tools.addWidget(btn_flip)
+row_tools.addWidget(btn_sharp)
+row_tools.addWidget(btn_bw)
+row_tools.addLayout(row_tools)
+col2.addLayout(row_tools)
+
+row.addLayout(col1,20)
+row.addLayout(col2,80)
+window.setLayout(row)
+
+window.show()
+app.exec_()
