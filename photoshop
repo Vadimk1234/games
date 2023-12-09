@@ -83,5 +83,7 @@ class ImageProcessor():
             image_path=os.path.join(path,self.filename)
             self.image.save(image_path)
         def blur(self):
-            self.image=self.
+            self.image=self.image.filter(ImageFilter.BoxBlur(4))
+            image_path=os.path.join(self.dir,self.save_dir,self.filename)
+            self.saveImage()
 app.exec_()
