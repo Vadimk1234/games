@@ -37,4 +37,51 @@ row.addLayout(col2,80)
 window.setLayout(row)
 
 window.show()
+wdir=""
+def filter(files,extension):
+    result=[]
+    for filename in files:
+        for ext in extension:
+            if filename.endwith(ext):
+                result.append(filename)
+    return result
+
+def choosewDir():
+    global wdir
+    wdir=QFileDialog.getExistingDirectory()
+
+def showFileNameList():
+    extension=['.jpg','.jpeg','.png','.gif','.bmp']
+    choosewDir()
+    filenames=filter(os.listdir(wdir),extension)
+
+    lw_files.clear()
+    for filename in filenames:
+        lw_files.addItem(filename)
+    btn_dir.clicked.connect(showFileNameList)
+
+class ImageProcessor():
+        def __init__(self):
+            self.image = None
+            self.filename = None
+            self.dir=None
+            self.save_dir="Modified/"
+        def loadiimage(self,dir,filename):
+            self.filename=filename
+            self.dir=dir
+            image_path=os.path.join(dir,filename)
+            self.image=Image.open(image_path)
+        def do_btw(self):
+            self.image=self.image.convert('L')
+            self.saveImage()
+            image_path=os.path.join(self.dir,self.save_dir,self.filename)
+            self.showImage(image_path)
+        def saveImage(self):
+            path=os.path.join(self.dir,self.save_dir)
+            if not(os.path.exists(path)or os.path.isdir(path)):
+                os.mkdir(path)
+            image_path=os.path.join(path,self.filename)
+            self.image.save(image_path)
+        def blur(self):
+            self.image=self.
 app.exec_()
